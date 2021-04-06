@@ -1,3 +1,23 @@
 /*============================================================================================*/
 /* Your custom styles below */
 /*============================================================================================*/
+
+#sendEmail {
+    position: fixed;
+    right: 25px;
+    bottom: 80px;
+    padding-top: 5px;
+    z-index: 9999;
+    width: 46px;
+    height: 46px;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 1;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 21px;
+    color: #fff;
+    cursor: pointer;
+}
+#sendEmail:hover {
+    background-color: #3578fa;
+}
