@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<html>
+<body>
+
+<h1>Cara panggil GET API</h1>
+
+<p id="demo"></p>
+
+<script>
+window.onload = function(){
+
+$.ajax({
+	type: "GET",
+    url: "http://ridhopratama.net:8899/vaccine/testimonies?page=1",
+	success: function (data) {
+	//sesuaikan kebutuhan data yang mau dipanggil 
+		document.getElementById("demo").innerHTML = data.data[0].text;
+    },
+	error: function(jqxhr){
+		alert(jqxhr.responseText);
+	}
+});}
+
+</script> 
+
+</body>
+</html>
