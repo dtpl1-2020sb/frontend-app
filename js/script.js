@@ -24,7 +24,7 @@ function requestTestimonies() {
                 <div class="review_card" id="review_card_${x.id}">
                     <div class="row">
                         <div class="col-md-1 user_info">
-                            <figure><img src="img/avatar4.jpg" alt=""></figure>
+                            <div id="profile_image">${x.author.name.charAt(0)}</div>
                         </div>
                         <div class="col-md-10 review_content">
                             <div class="clearfix add_bottom_15"></div>
