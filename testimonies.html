@@ -74,11 +74,67 @@
 
 		</div>
 		
-	</main>	
+	</main>
+	
+	<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable" role="document">
+		  <div class="modal-content" style="margin-top: 50pt;">
+			<div class="modal-header border-bottom-0">
+			  <h5 class="modal-title" id="exampleModalLabel">Formulir Testimoni Peserta Vaksin</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<form>
+			  <div class="modal-body">
+				<div class="form-group">
+				  <label for="fullName">Nama Lengkap</label>
+				  <input type="text" class="form-control" id="fullName" placeholder="Masukkan nama lengkap anda">
+				</div>
+				<div class="form-group">
+					<label for="nickName">Nama Panggilan</label>
+					<input type="text" class="form-control" id="nickName" placeholder="Masukkan nama panggilan anda">
+				  </div>
+				  <div class="form-group">
+					<label for="gender">Jenis Kelamin</label><br>
+					<input type="radio" id="male" name="gender" value="male">
+					<label for="male">Laki - Laki</label><br>
+					<input type="radio" id="female" name="gender" value="female">
+					<label for="female">Perempuan</label><br>
+				  </div>
+				  <div class="form-group">
+					<label for="dateOfBirth">Tanggal Lahir</label>
+					<input type="date" class="form-control" id="dateOfBirth">
+				  </div>
+				  <div class="form-group">
+					<label for="nik">NIK</label>
+					<input type="number" class="form-control" id="nik" placeholder="Optional">
+				  </div>
+				  <div class="form-group">
+					<label for="domicile">Lokasi Domisili</label>
+					<input type="text" class="form-control" id="domicile" aria-describedby="emailHelp" placeholder="Kelurahan">
+				  </div>
+				  <div class="form-group">
+					<label for="email1">Cerita Pengalaman</label>
+					<textarea id="w3review" name="w3review" rows="4" cols="60" placeholder="Hal dapat termasuk lokasi vaksinasi, tanggal vaksinasi, vaksinasi ke I/II, konteks vaksinasi (Lansia / ASN atau Mandiri) serta pengalaman Anda."></textarea>
+				  </div>
+			  </div>
+			  <div class="modal-footer border-top-0 d-flex justify-content-center">
+				<button type="submit" class="btn btn-success">Submit</button>
+			  </div>
+			</form>
+		  </div>
+		</div>
+	  </div>
 	
 	<!-- Send Email -->
-	<a href="mailto:bambang.surambang%40example.com?subject=Sharing%20Pengalaman%20Vaksin%20Indonesia&body=Nama%20Lengkap%20%3A%0aNama%20Panggilan%20%3A%0aJenis%20Kelamin%3A%0aUsia%3A%0aNIK%3A%0aLokasi%20Domisili%20%28kelurahan%29%20%3A%0aCerita%20Pengalaman%20anda%20%3A%0a%0aSalam%20hangat%2C%0aBambang%20Surambang%20dan%20Tim%20Pengembang" id="sendEmail" title="Send Email">
+	<!-- <a href="mailto:bambang.surambang%40example.com?subject=Sharing%20Pengalaman%20Vaksin%20Indonesia&body=Nama%20Lengkap%20%3A%0aNama%20Panggilan%20%3A%0aJenis%20Kelamin%3A%0aUsia%3A%0aNIK%3A%0aLokasi%20Domisili%20%28kelurahan%29%20%3A%0aCerita%20Pengalaman%20anda%20%3A%0a%0aSalam%20hangat%2C%0aBambang%20Surambang%20dan%20Tim%20Pengembang" id="sendEmail" title="Send Email">
 		<i class="icon_mail"></i>
+	</a> -->
+
+	<!-- Open Modal Form -->
+	<a href="" id="openModal" title="Masukkan Testimoni" data-toggle="modal" data-target="#form">
+		<i class="icon_plus"></i>
 	</a>
 	
 	<div id="toTop" onclick='window.scrollTo({top: 0, behavior: "smooth"});' ></div><!-- Back to top button -->
