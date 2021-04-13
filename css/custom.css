@@ -21,3 +21,15 @@
 #sendEmail:hover {
     background-color: #3578fa;
 }
+
+#profile_image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #3578FA;
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    line-height: 61px;
+    margin: 15px 0;
+}
