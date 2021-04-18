@@ -1,7 +1,7 @@
 function testimonyLikeClickHandler(element, testimonyID) {
     $.ajax({
         type: "POST",
-        url: `http://ridhopratama.net:8899/vaccine/testimony/${testimonyID}/like`,
+        url: `https://x-dtpl.ridhopratama.net/vaccine/testimony/${testimonyID}/like`,
         data: "",
         success: function (response) {
             alert('Like testimony sukses!')
@@ -17,7 +17,7 @@ function testimonyLikeClickHandler(element, testimonyID) {
 function requestTestimonies() {
     $.ajax({
         type: "GET",
-        url: "http://ridhopratama.net:8899/vaccine/testimonies?page=1",
+        url: "https://x-dtpl.ridhopratama.net/vaccine/testimonies?page=1",
         success: function (response) {
             $.each(response.data, function (i, x) {
                 const card = `
