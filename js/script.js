@@ -54,3 +54,31 @@ function requestTestimonies() {
 }
 
 requestTestimonies()
+
+$("#loginForm").submit(function(event)
+{
+    event.preventDefault();
+    $.ajax({
+        contentType: 'application/json',
+        dataType: 'json',
+        type: "POST",
+        url: "https://x-dtpl.ridhopratama.net/auth/login",
+        data:JSON.stringify({
+            username: $('#username').val(),
+            password: $('#password').val()
+        }),
+        success: function(result)
+        {
+            if(result.data.user_data)
+            {
+                window.alert("berhasil login");
+                window.location = 'index.html';
+            }
+            else
+            {
+                window.alert("Gagal Login");
+            }
+        }
+    });
+    return false;
+});
