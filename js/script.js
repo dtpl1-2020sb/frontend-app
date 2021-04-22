@@ -90,6 +90,7 @@ function testimonyLikeClickHandler(element, testimonyID) {
         url: `https://x-dtpl.ridhopratama.net/vaccine/testimony/${testimonyID}/like`,
         data: "",
         success: function (response) {
+            location.reload();
             alert('Like testimony sukses!')
         },
         error: function(jqxhr){
