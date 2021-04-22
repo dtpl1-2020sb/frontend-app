@@ -6,11 +6,11 @@ function sendTestimonies() {
         url: "https://x-dtpl.ridhopratama.net/vaccine/testimony",
         data: JSON.stringify({
             name: $('#fullName').val(),
-            // nickName: $('#nickName').val(),
+            nickname: $('#nickName').val(),
             email: $('#email').val(),
             gender: $('input[name="gender"]:checked').val(),
             dob: $('#dateOfBirth').val(),
-            // nik: $('#nik').val(),
+            nik: $('#nik').val(),
             address: $('#domicile').val(),
             text: $('#testimonies').val()
         }),
