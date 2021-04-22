@@ -1,36 +1,55 @@
-function submitTestimonyClickHandler() {
-    
-    let form_fullname = $("#fullName").val()
-    let form_nickname = $("#nickName").val()
-    let form_gender = $("input[name='gender']:checked").val()
-    let form_dateOfBirth = $("#dateOfBirth").val()
-    let form_nik = $("#nik").val()
-    let form_domicile = $("#domicile").val()
-    let form_w3review = $("#w3review").val()
-
-    
+function sendTestimonies() {
     $.ajax({
+        contentType: 'application/json',
+        dataType: 'json',
         type: "POST",
-        url: `https://x-dtpl.ridhopratama.net/vaccine/testimony`,
+        url: "https://x-dtpl.ridhopratama.net/vaccine/testimony",
         data: JSON.stringify({
-            name: form_fullname,
-            dob: form_dateOfBirth,
-            adress: form_domicile,
-            text: form_w3review,
-            gender: form_gender,
-            nik: form_nik,
+            name: $('#fullName').val(),
+            // nickName: $('#nickName').val(),
+            email: $('#email').val(),
+            gender: $('input[name="gender"]:checked').val(),
+            dob: $('#dateOfBirth').val(),
+            // nik: $('#nik').val(),
+            address: $('#domicile').val(),
+            text: $('#testimonies').val()
         }),
-        success: function (response) {
-            $('#form').modal('hide');
-            alert("Data testimony berhasil disimpan")
-        },
-        error: function(jqxhr){
-            alert("Proses penyimpanan data gagal: " + jqxhr.responseJSON.error.message);
-        }
-    })
+        success: function (result) {
+            $('#submitTestimoniesModal').modal('hide');
+            if (result.data.message == "create testimony success") {
+                $('#modal-label').append("Berhasil");
+                const message = "Testimoni Anda berhasil terkirim dan sedang dalam tahap review. Testimoni yang terpilih akan muncul di halaman ini."
+                const p = `
+                <p>${message}</p>
+                `
+                $('#modal-message').append(p);
 
-    return false
+                $('#afterSubmitTestimoniesModal').modal('show');
+            }
+            else {
+                $('#modal-label').append("Gagal");
+                const message = toTitleCase(result.data.message)
+                const p = `
+                <p>${message}</p>
+                `
+                $('#modal-message').append(p);
+
+                $('#afterSubmitTestimoniesModal').modal('show');
+
+            }
+        }
+    });
 }
+
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
+}
+
 
 function loginClickHandler() {
     let form_username = $("#username").val()
