@@ -1,5 +1,5 @@
 function submitTestimonyClickHandler() {
-    //baris dibawah menangkap nilai dari isian form
+    
     let form_fullname = $("#fullName").val()
     let form_nickname = $("#nickName").val()
     let form_gender = $("input[name='gender']:checked").val()
