@@ -91,7 +91,7 @@ function testimonyLikeClickHandler(element, testimonyID) {
         data: "",
         success: function (response) {
             location.reload();
-            alert('Like testimony sukses!')
+            
         },
         error: function(jqxhr){
             alert(jqxhr.responseText);
