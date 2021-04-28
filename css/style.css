@@ -1510,12 +1510,9 @@ ul#additional_links li:after {
   }
 }
 .hero_single.office {
-  height: 500px;
-  background: #222 url(../img/office_1.jpg) center bottom no-repeat fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  height: 200px;
+  background: #fff;
+
 }
 @media (max-width: 767px) {
   .hero_single.office {
@@ -1523,9 +1520,7 @@ ul#additional_links li:after {
   }
 }
 .hero_single.office .wrapper {
-  background: rgba(0, 0, 0, 0.9);
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9), transparent);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+  background: #3578FA;
   text-align: center;
 }
 @media (max-width: 767px) {
