@@ -162,7 +162,7 @@ function logoutClickHandler() {
 
 function checkAuth(){
     if(localStorage['token_key']==null || localStorage['token_key'].length==0){
-        window.location.replace("testimonies.html");
+        window.location.replace("index.html");
     }
 }
 
