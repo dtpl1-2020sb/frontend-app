@@ -150,6 +150,7 @@ function setAfterAuth(){
         $("#login").hide();
         $("#admin_url").show();
         $("#logout").show();
+        location.href = 'admin.html';
     }
 }
 
