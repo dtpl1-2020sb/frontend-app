@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Update FAQ</title>
+
+	<!-- Favicons-->
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+		href="img/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+		href="img/apple-touch-icon-144x144-precomposed.png">
+
+	<!-- Fontawesome WEB FONT -->
+	<link href="assets/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
+
+	<!-- GOOGLE WEB FONT -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+	<!-- BASE CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/vendors.css" rel="stylesheet">
+
+	<!-- YOUR CUSTOM CSS -->
+	<link href="css/custom.css" rel="stylesheet">
+
+	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script type='text/javascript'
+		src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+	<script type='text/javascript'></script>
+	<style type="text/css">
+		input[type=text],
+		select {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		input[type=submit] {
+			width: 100%;
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		input[type=submit]:hover {
+			background-color: #45a049;
+		}
+	</style>
+</head>
+
+<body style="background-color: #edf3f7;">
+
+	<div id="page">
+
+		<header class="header_in is_fixed menu_fixed">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-12">
+						<div id="logo">
+							<a href="#">
+								<img src="img/bambangcare.svg" width="140" height="35" alt="" class="logo_sticky">
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-9 col-12">
+						<ul id="top_menu">
+							<li><a href="admin.html"  class="btn_top" id="admin_url">Beranda</a></li>
+							<li><a href="faq_admin.html"  class="btn_top">Update FAQ</a></li>
+							<li><a href="" id="logout" class="btn_top" onclick="logoutClickHandler()">Logout</a></li>
+							
+						</ul>
+						<!-- /top_menu -->
+						<a href="#menu" class="btn_mobile">
+							<div class="hamburger hamburger--spin" id="hamburger">
+								<div class="hamburger-box">
+									<div class="hamburger-inner"></div>
+								</div>
+							</div>
+						</a>
+						
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->		
+		</header>
+		<!-- /header -->
+
+		<main>
+			<br><br><br><br>
+			<div class="container">
+				<h1>Update Frequently Asked Questions (FAQ)</h1>
+			</div>
+
+			<div id="result" style="display:none;"></div>
+
+			<div style="padding: 5%;">
+
+				<form id="myForm">
+					<input type="hidden" value="faq" name="key">
+
+					<div id="formFaq">
+					</div>
+					<div id="new_chq"></div>
+
+					<input type="submit" value="Update" onclick="updateFaq()">
+
+				</form>
+				<input type="submit" value="Add" id="add" class="btn btn-primary">
+				<input type="submit" value="Remove" id="remove" class="btn btn-danger">
+
+				<!-- Open Modal Form -->
+			<a href="" id="add" title="Tambah QnA">
+			<i class="icon_plus"></i>
+		</a>
+
+		<!-- Open Modal Form -->
+		<a href="" id="remove" title="Hapus QnA">
+		<i class="icon_minus"></i>
+	</a>
+			</div>
+
+		</main>
+
+		<div id="toTop" onclick='window.scrollTo({top: 0, behavior: "smooth"});'></div><!-- Back to top button -->
+
+		<!-- COMMON SCRIPTS -->
+		<script src="js/common_scripts.js"></script>
+		<script src="js/functions.js"></script>
+		<script src="assets/validate.js"></script>
+		<script src="js/script_admin.js"></script>
+		<script type="text/javascript" src="jquery-1.2.3.min.js"></script>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+		<!-- <script type="text/javascript">
+$(document).ready(function() {
+
+	$().ajaxStart(function() {
+		$('#result').hide();
+	}).ajaxStop(function() {
+		$('#result').fadeIn('slow');
+	});
+
+	$('#myForm').submit(function() {
+		alert($(this).serialize())
+		$.ajax({
+			type: 'POST',
+			url: 'https://jsonplaceholder.typicode.com/posts',
+			data: $(this).serialize(),
+			success: function(data) {
+				$('#result').html(data);
+			}
+		})
+		return false;
+	});
+})
+</script> -->
+
+</body>
+
+</html>

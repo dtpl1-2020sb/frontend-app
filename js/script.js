@@ -154,5 +154,38 @@ function setAfterAuth(){
     }
 }
 
+function getFaq() {
+    $.ajax({
+        type: "GET",
+        url: "https://x-dtpl.ridhopratama.net/site/configs?key=faq",
+        success: function (response) {
+            $.each(response.data[0].value, function (i, x) {
+                const card = `
+                <div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion_oneLeft"
+									href="#faq${i}" aria-expanded="false" class="collapsed"> ${x.question} </a> </h4>
+						</div>
+						<div id="faq${i}" class="panel-collapse collapse" aria-expanded="false"
+							role="tablist" style="height: 0px;">
+							<div class="panel-body">
+								<div class="text-accordion">
+									<p> ${x.answer} </p>
+								</div>
+							</div>
+						</div>
+					</div>
+                `
+
+                $('#accordionFourLeft').append(card);
+            });
+        },
+        error: function(jqxhr){
+            alert(jqxhr.responseText);
+        }
+    });
+}
+getFaq()
+
 requestTestimonies()
 setAfterAuth()

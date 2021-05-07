@@ -168,3 +168,101 @@ function checkAuth(){
 
 requestTestimonies()
 checkAuth()
+
+function getAdminFaq() {
+    $.ajax({
+        type: "GET",
+        async: false, 
+        url: "https://x-dtpl.ridhopratama.net/site/configs?key=faq",
+        success: function (response) {
+            $.each(response.data[0].value, function (i, x) {
+                const card = `
+                <label for="value[${i}][question]">Question ${i + 1}</label>
+				<input type="text" id="value[${i}][question]" name="value[${i}][question]" value="${x.question}">
+			  
+				<label for="value[${i}][answer]">Answer ${i + 1}</label>
+                <textarea id="value[${i}][answer]" name="value[${i}][answer]" class="form-control" rows="5">${x.answer}</textarea>
+                `
+                
+                $('#formFaq').append(card);
+                if ((response.data[0].value.length - 1) == i) {
+                    const number = `<input type="hidden" value="${i}" id="total_chq">`
+                    $('#formFaq').append(number);
+                }
+
+            });
+        },
+        error: function(jqxhr){
+            alert(jqxhr.responseText);
+        }
+    });
+}
+
+getAdminFaq()
+
+function updateFaq() {
+    console.log(parseInt($('#total_chq').val()))
+    console.log(document.getElementById("value[0][question]").value)
+    console.log(document.getElementById("value[0][answer]").value)
+
+    let qna ="";
+    for (let index = 0; index <= parseInt($('#total_chq').val()); index++) {
+        console.log(index)
+        qna += `{"question": "` +document.getElementById(`value[${index}][question]`).value +`","answer": "`+document.getElementById(`value[${index}][answer]`).value +`"}`
+        if ((parseInt($('#total_chq').val())) != index) {
+            qna +=`,`
+        }
+        console.log(qna)
+    }
+
+    let data = `{"key": "faq","value":[`+qna+`]}`
+
+    console.log(JSON.parse(data))
+
+    $.ajax({
+        type: "POST",
+        async: false, 
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Access-Control-Allow-Origin', "*");
+            xhr.setRequestHeader('Authorization', "Bearer " + localStorage['token_key']);
+        },
+        url: `https://x-dtpl.ridhopratama.net/site/config`,
+        data: JSON.stringify(JSON.parse(data)),
+        success: function (response) {
+            alert('FAQ Updated')
+            location.reload()
+        },
+        error: function(jqxhr){
+            alert(jqxhr.responseText);
+        }
+    })
+
+    return false
+}
+
+$('#add').on('click', add);
+$('#remove').on('click', remove);
+
+function add() {
+  var new_chq_no = parseInt($('#total_chq').val()) + 1;
+//   var new_input = "<label for='value[" + new_chq_no + "][question]' id='value[" + new_chq_no + "][question]'>Added Question</label> <input type='text' id='value[" + new_chq_no + "][question]' name='value[" + new_chq_no + "][question]'><br><label for='value[" + new_chq_no + "][answer]' id='value[" + new_chq_no + "][answer]'>Added Answer</label><input type='text' name='value[" + new_chq_no + "][answer]' id='value[" + new_chq_no + "][answer]'>";
+  var new_input = "<label for='value[" + new_chq_no + "][question]' class='new_label_" + new_chq_no + "'>Added Question</label> <input type='text' class='new_" + new_chq_no + "' id='value[" + new_chq_no + "][question]' name='value[" + new_chq_no + "][question]'><br><label for='value[" + new_chq_no + "][answer]' class='new_label_" + new_chq_no + "'>Added Answer</label><input type='text' class='new_" + new_chq_no + "' id='value[" + new_chq_no + "][answer]' name='value[" + new_chq_no + "][answer]'>";
+
+  $('#new_chq').append(new_input);
+
+  $('#total_chq').val(new_chq_no);
+}
+
+function remove() {
+  var last_chq_no = $('#total_chq').val();
+
+  if (last_chq_no > 0) {
+    // $('#value[' + last_chq_no + '][question]').remove();
+    // $('#value[' + last_chq_no + '][answer]').remove();
+    $('.new_label_' + (last_chq_no)).remove();
+    $('.new_label_' + (last_chq_no)).remove();
+    $('.new_' + last_chq_no).remove();
+    $('.new_' + (last_chq_no)).remove();
+    $('#total_chq').val(last_chq_no - 1);
+  }
+}

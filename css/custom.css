@@ -22,6 +22,10 @@
     background-color: #3578fa;
 }
 
+.modal-backdrop {
+    z-index: -1;
+  }
+
 #profile_image {
     width: 60px;
     height: 60px;
