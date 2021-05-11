@@ -101,10 +101,20 @@ function testimonyLikeClickHandler(element, testimonyID) {
     return false
 }
 
-function requestTestimonies() {
+function requestTestimonies(pages) {
+    $("#review-card").empty();
+    $('#pages').find('a').each(function(){
+        var innerDivId = $(this).attr('id');
+        $("#" + innerDivId).removeClass("active");
+    });
+
+    let pageNumber = 1
+    if (pages != undefined){
+        pageNumber = pages
+    }
     $.ajax({
         type: "GET",
-        url: "https://x-dtpl.ridhopratama.net/vaccine/testimonies?page=1",
+        url: "https://x-dtpl.ridhopratama.net/vaccine/testimonies?page=" + pageNumber,
         success: function (response) {
             $.each(response.data, function (i, x) {
                 const card = `
@@ -132,12 +142,35 @@ function requestTestimonies() {
                 `
 
                 $('#review-card').append(card);
+                $("#page-" + pages).addClass("active");
             });
+            
         },
         error: function(jqxhr){
             alert(jqxhr.responseText);
         }
     });
+}
+
+function checkNextPage() {
+    var totalPage = 25;
+    for (let page = 1; page < totalPage; page++) {
+        $.ajax({
+            type: "GET",
+            async: false, 
+            url: "https://x-dtpl.ridhopratama.net/vaccine/testimonies?page=" + page,
+            success: function (response) {
+                if(response.data.length > 0){
+                    var pagination = `<a href="#" onclick="requestTestimonies(${page})" id="page-${page}" >${page}</a>`
+                    $('#pages').append(pagination);
+                } 
+            },
+            error: function(jqxhr){
+                alert(jqxhr.responseText);
+            }
+        });
+        
+    }
 }
 
 function setAfterAuth(){
@@ -186,6 +219,6 @@ function getFaq() {
     });
 }
 getFaq()
-
+checkNextPage()
 requestTestimonies()
 setAfterAuth()
