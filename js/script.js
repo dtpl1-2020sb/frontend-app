@@ -153,7 +153,7 @@ function requestTestimonies(pages) {
 }
 
 function checkNextPage() {
-    var totalPage = 25;
+    var totalPage = 8;
     for (let page = 1; page < totalPage; page++) {
         $.ajax({
             type: "GET",
