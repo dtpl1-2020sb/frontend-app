@@ -71,6 +71,98 @@ function testimonyChangeStatusClickHandler(element, testimonyID, status) {
     return false
 }
 
+function checkNextPageNotApproved() {
+    var totalPage = 8;
+    for (let page = 2; page < totalPage; page++) {
+        $.ajax({
+            type: "GET",
+            async: false, 
+            url: "https://x-dtpl.ridhopratama.net/vaccine/testimonies?page=" + page + "&status=pending",
+            success: function (response) {
+                if(response.data.length > 0){
+                    $.each(response.data, function (i, x) {
+                        const card = `
+                        <div class="review_card" id="review_card_${x.id}">
+                            <div class="row">
+                                <div class="col-md-1 user_info">
+                                    <div id="profile_image">${x.author.name.charAt(0)}</div>
+                                </div>
+                                <div class="col-md-9 review_content">
+                                    <div class="clearfix add_bottom_15"></div>
+                                    <h5>${x.author.name}, ${x.author.age} Tahun, ${x.author.address}</h5>
+                                    <p>${x.text}</p>
+                                    <ul>
+                                        <li>
+                                            <button class="btn btn-success" onclick="return testimonyChangeStatusClickHandler(this, ${x.id}, 1)">
+                                                <i class="fa fa-check"></i> Terima
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="btn btn-danger" onclick="return testimonyChangeStatusClickHandler(this, ${x.id}, 3)">
+                                                <i class="fa fa-times"></i> Tolak
+                                            </button>
+                                        </li>
+                                        <br>
+                                    </ul>
+        
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        `
+        
+                        $('#belum-disetujui-card').append(card);
+                    });
+                }
+            },
+            error: function(jqxhr){
+                alert(jqxhr.responseText);
+            }
+        });
+        
+    }
+}
+
+function checkNextPageApproved() {
+    var totalPage = 8;
+    for (let page = 2; page < totalPage; page++) {
+        $.ajax({
+            type: "GET",
+            url: "https://x-dtpl.ridhopratama.net/vaccine/testimonies?page=" + page,
+            success: function (response) {
+                if(response.data.length > 0){
+                    $.each(response.data, function (i, x) {
+                        const card = `
+                        <div class="review_card" id="review_card_${x.id}">
+                            <div class="row">
+                                <div class="col-md-1 user_info">
+                                    <div id="profile_image">${x.author.name.charAt(0)}</div>
+                                </div>
+                                <div class="col-md-9 review_content">
+                                    <div class="clearfix add_bottom_15"></div>
+                                    <h5>${x.author.name}, ${x.author.age} Tahun, ${x.author.address}</h5>
+                                    <p>${x.text}</p>
+                                </div>
+                                <div class="col-md-2 align-self-center">
+                                    <button class="btn btn-danger" onclick="return testimonyChangeStatusClickHandler(this, ${x.id}, 2)">
+                                        <i class="fa fa-trash"></i> Hapus
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        `
+        
+                        $('#sudah-disetujui-card').append(card);
+                    });
+                }
+            },
+            error: function(jqxhr){
+                alert(jqxhr.responseText);
+            }
+        });
+        
+    }
+}
 
 function requestTestimonies() {
     //draft data
@@ -111,6 +203,7 @@ function requestTestimonies() {
 
                 $('#belum-disetujui-card').append(card);
             });
+            checkNextPageNotApproved()
         },
         error: function(jqxhr){
             alert(jqxhr.responseText);
@@ -145,6 +238,7 @@ function requestTestimonies() {
 
                 $('#sudah-disetujui-card').append(card);
             });
+            checkNextPageApproved()
         },
         error: function(jqxhr){
             alert(jqxhr.responseText);
@@ -178,10 +272,10 @@ function getAdminFaq() {
             $.each(response.data[0].value, function (i, x) {
                 const card = `
                 <label for="value[${i}][question]">Question ${i + 1}</label>
-				<input type="text" id="value[${i}][question]" name="value[${i}][question]" value="${x.question}">
+				<input type="text" id="value[${i}][question]" name="value[${i}][question]" value="${decodeURIComponent(x.question)}">
 			  
 				<label for="value[${i}][answer]">Answer ${i + 1}</label>
-                <textarea id="value[${i}][answer]" name="value[${i}][answer]" class="form-control" rows="5">${x.answer}</textarea>
+                <textarea id="value[${i}][answer]" name="value[${i}][answer]" class="form-control" rows="5">${decodeURIComponent(x.answer)}</textarea>
                 `
                 
                 $('#formFaq').append(card);
@@ -201,23 +295,15 @@ function getAdminFaq() {
 getAdminFaq()
 
 function updateFaq() {
-    console.log(parseInt($('#total_chq').val()))
-    console.log(document.getElementById("value[0][question]").value)
-    console.log(document.getElementById("value[0][answer]").value)
-
     let qna ="";
     for (let index = 0; index <= parseInt($('#total_chq').val()); index++) {
-        console.log(index)
-        qna += `{"question": "` +document.getElementById(`value[${index}][question]`).value +`","answer": "`+document.getElementById(`value[${index}][answer]`).value +`"}`
+        qna += `{"question": "` + encodeURIComponent(document.getElementById(`value[${index}][question]`).value) +`","answer": "`+ encodeURIComponent(document.getElementById(`value[${index}][answer]`).value) +`"}`
         if ((parseInt($('#total_chq').val())) != index) {
             qna +=`,`
         }
-        console.log(qna)
     }
 
     let data = `{"key": "faq","value":[`+qna+`]}`
-
-    console.log(JSON.parse(data))
 
     $.ajax({
         type: "POST",
