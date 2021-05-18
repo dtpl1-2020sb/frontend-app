@@ -196,13 +196,13 @@ function getFaq() {
                 <div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion_oneLeft"
-									href="#faq${i}" aria-expanded="false" class="collapsed"> ${x.question} </a> </h4>
+									href="#faq${i}" aria-expanded="false" class="collapsed"> ${decodeURIComponent(x.question)} </a> </h4>
 						</div>
 						<div id="faq${i}" class="panel-collapse collapse" aria-expanded="false"
 							role="tablist" style="height: 0px;">
 							<div class="panel-body">
 								<div class="text-accordion">
-									<p> ${x.answer} </p>
+									<p> ${decodeURIComponent(x.answer)} </p>
 								</div>
 							</div>
 						</div>
