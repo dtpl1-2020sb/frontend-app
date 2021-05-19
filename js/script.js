@@ -218,6 +218,27 @@ function getFaq() {
     });
 }
 getFaq()
+
+function getAboutus() {
+    $.ajax({
+        type: "GET",
+        url: "https://x-dtpl.ridhopratama.net/site/configs?key=about_us",
+        success: function (response) {
+            $.each(response.data, function (i, x) {
+                const card = `
+                <p>${x.value}</p>
+                `
+
+                $('#about-detail').append(card);
+            });
+        },
+        error: function(jqxhr){
+            alert(jqxhr.responseText);
+        }
+    });
+}
+getAboutus()
+
 checkNextPage()
 requestTestimonies()
 setAfterAuth()
