@@ -352,3 +352,35 @@ function remove() {
     $('#total_chq').val(last_chq_no - 1);
   }
 }
+
+function updateAboutus() {
+    let qna ="";
+    for (let index = 0; index <= parseInt($('#total_chq').val()); index++) {
+        qna += `{"value": "` + encodeURIComponent(document.getElementById(`value[${index}][question]`).value) +`"}`
+        if ((parseInt($('#total_chq').val())) != index) {
+            qna +=`,`
+        }
+    }
+
+    let data = `{"key": "about_us","value":[`+qna+`]}`
+
+    $.ajax({
+        type: "POST",
+        async: false, 
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Access-Control-Allow-Origin', "*");
+            xhr.setRequestHeader('Authorization', "Bearer " + localStorage['token_key']);
+        },
+        url: `https://x-dtpl.ridhopratama.net/site/config`,
+        data: JSON.stringify(JSON.parse(data)),
+        success: function (response) {
+            alert('About Us Updated')
+            location.reload()
+        },
+        error: function(jqxhr){
+            alert(jqxhr.responseText);
+        }
+    })
+
+    return false
+}
