@@ -361,7 +361,7 @@ function getAdminAboutus() {
         success: function (response) {
             $.each(response.data, function (i, x) {
                 const card = `
-                <textarea id="value[${i}][detail]" name="value[${i}][detail]" class="form-control" rows="5">${decodeURIComponent(x.value)}</textarea>
+                <textarea id="value[${i}][detail]" name="value[${i}][detail]" class="form-control">${decodeURIComponent(x.value)}</textarea>
                 `
                 
                 $('#formAboutus').append(card);
@@ -378,6 +378,7 @@ function getAdminAboutus() {
     });
 }
 
+getAdminAboutus()
 
 function updateAboutus() {
     let qna ="";
