@@ -353,6 +353,32 @@ function remove() {
   }
 }
 
+function getAdminAboutus() {
+    $.ajax({
+        type: "GET",
+        async: false, 
+        url: "https://x-dtpl.ridhopratama.net/site/configs?key=about_us",
+        success: function (response) {
+            $.each(response.data, function (i, x) {
+                const card = `
+                <textarea id="value[${i}][detail]" name="value[${i}][detail]" class="form-control" rows="5">${decodeURIComponent(x.value)}</textarea>
+                `
+                
+                $('#formAboutus').append(card);
+                if ((response.data[0].value.length - 1) == i) {
+                    const number = `<input type="hidden" value="${i}" id="total_chq">`
+                    $('#formAboutus').append(number);
+                }
+
+            });
+        },
+        error: function(jqxhr){
+            alert(jqxhr.responseText);
+        }
+    });
+}
+
+
 function updateAboutus() {
     let qna ="";
     for (let index = 0; index <= parseInt($('#total_chq').val()); index++) {
