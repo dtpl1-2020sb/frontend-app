@@ -390,7 +390,7 @@ function updateAboutus() {
     }
 
     let data = `{"key": "about_us","value":[`+abt+`]}`
-
+    console.log(data)
     $.ajax({
         type: "POST",
         async: false, 
