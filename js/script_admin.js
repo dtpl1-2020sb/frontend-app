@@ -383,7 +383,7 @@ getAdminAboutus()
 function updateAboutus() {
     let abt ="";
     for (let index = 0; index <= parseInt($('#total').val()); index++) {
-        abt += `{"value": "` + encodeURIComponent(document.getElementById(`value[${index}][value]`).value) +`"}`
+        abt += `{"value": "' + encodeURIComponent($('#value[index][value]').val() + '"}` 
         if ((parseInt($('#total').val())) != index) {
             abt +=`,`
         }
