@@ -359,16 +359,16 @@ function getAdminAboutus() {
         async: false, 
         url: "https://x-dtpl.ridhopratama.net/site/configs?key=about_us",
         success: function (response) {
+            console.log(response.data[0].value.length);
             $.each(response.data, function (i, x) {
                 const card = `
-                <textarea id="value[${i}][value]" name="value[${i}][value]" class="form-control" style="height:500px;">${decodeURIComponent(x.value)}</textarea>
+                <textarea id="value[${i}]" name="value[${i}]" class="form-control" style="height:500px;">${decodeURIComponent(x.value)}</textarea>
                 `
-                
                 $('#formAboutus').append(card);
-                if ((response.data[0].value.length - 1) == i) {
-                    const number = `<input type="hidden" value="${i}" id="total">`
-                    $('#formAboutus').append(number);
-                }
+                // if ((response.data[0].value.length - 1) == i) {
+                //     const number = `<input type="hidden" value="${i}" id="total">`
+                //     $('#formAboutus').append(number);
+                // }
 
             });
         },
@@ -381,17 +381,20 @@ function getAdminAboutus() {
 getAdminAboutus()
 
 function updateAboutus() {
-    let abt ="";
-    for (let index = 0; index <= parseInt($('#total').val()); index++) {
-        abt += `{"value": "' + encodeURIComponent($('#value[index][value]').val() + '"}` 
-        if ((parseInt($('#total').val())) != index) {
-            abt +=`,`
-        }
-    }
-	console.log(abt)
+    // let abt ="";    
+    // console.log('tes');
+    // for (let index = 0; index <= parseInt($('#total').val()); index++) {
+    //     var valuetext = $('textarea#value['+index+']').val();                
 
-    let data = `{"key": "about_us","value":[`+abt+`]}`
-    console.log(data)
+    //     abt += `{"value": "' + encodeURIComponent($('#value[index][value]').val() + '"}` 
+    //     if ((parseInt($('#total').val())) != index) {
+    //         abt +=`,`
+    //     }
+    // }
+    // let abt = `{"value": "` + encodeURIComponent(document.getElementById(`value[0]`).value)+'"}'    
+    // let abt = encodeURIComponent(document.getElementById(`value[0]`).value)
+    let data = `{"key": "about_us","value":"` + document.getElementById(`value[0]`).value+`"}`     
+
     $.ajax({
         type: "POST",
         async: false, 
@@ -402,6 +405,7 @@ function updateAboutus() {
         url: `https://x-dtpl.ridhopratama.net/site/config`,
         data: JSON.stringify(JSON.parse(data)),
         success: function (response) {
+            
             alert('About Us Updated')
             location.reload()
         },
