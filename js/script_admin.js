@@ -361,35 +361,35 @@ function getAdminAboutus() {
         success: function (response) {
             $.each(response.data, function (i, x) {
                 const card = `
-                <textarea id="value[${i}][detail]" name="value[${i}][detail]" class="form-control">${decodeURIComponent(x.value)}</textarea>
+                <textarea id="value[${i}][value]" name="value[${i}][value]" class="form-control" style="height:400px;">${decodeURIComponent(x.value)}</textarea>
                 `
                 
                 $('#formAboutus').append(card);
                 if ((response.data[0].value.length - 1) == i) {
-                    const number = `<input type="hidden" value="${i}" id="total_chq">`
+                    const number = `<input type="hidden" value="${i}" id="total">`
                     $('#formAboutus').append(number);
                 }
 
             });
         },
+        
         error: function(jqxhr){
             alert(jqxhr.responseText);
         }
     });
 }
-
 getAdminAboutus()
 
 function updateAboutus() {
-    let qna ="";
-    for (let index = 0; index <= parseInt($('#total_chq').val()); index++) {
-        qna += `{"value": "` + encodeURIComponent(document.getElementById(`value[${index}][value]`).value) +`"}`
-        if ((parseInt($('#total_chq').val())) != index) {
-            qna +=`,`
+    let abt ="";
+    for (let index = 0; index <= parseInt($('#total').val()); index++) {
+        abt += `{"value": "` + encodeURIComponent(document.getElementById(`value[${index}][value]`).value) +`"}`
+        if ((parseInt($('#total').val())) != index) {
+            abt +=`,`
         }
     }
 
-    let data = `{"key": "about_us","value":[`+qna+`]}`
+    let data = `{"key": "about_us","value":[`+abt+`]}`
 
     $.ajax({
         type: "POST",
