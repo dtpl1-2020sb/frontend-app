@@ -361,7 +361,7 @@ function getAdminAboutus() {
         success: function (response) {
             $.each(response.data, function (i, x) {
                 const card = `
-                <textarea id="value[${i}][value]" name="value[${i}][value]" class="form-control" style="height:400px;">${decodeURIComponent(x.value)}</textarea>
+                <textarea id="value[${i}][value]" name="value[${i}][value]" class="form-control" style="height:500px;">${decodeURIComponent(x.value)}</textarea>
                 `
                 
                 $('#formAboutus').append(card);
