@@ -388,6 +388,7 @@ function updateAboutus() {
             abt +=`,`
         }
     }
+	console.log(abt)
 
     let data = `{"key": "about_us","value":[`+abt+`]}`
     console.log(data)
